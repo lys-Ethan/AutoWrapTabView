@@ -1,6 +1,7 @@
 package com.pmlee.autowraptabview.view;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 
+import com.pmlee.autowraptabview.R;
 import com.pmlee.autowraptabview.adapter.AutoWrapAdapter;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ import java.util.List;
  * <p>
  * 自动换行标签控件
  */
-public class AutoWrapTabView extends LinearLayout implements View.OnClickListener {
+public class AutoWrapTabView extends LinearLayout  {
 
     private Context context;
     /**
@@ -61,11 +63,6 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
         HORIZONTAL, VERTICAL
     }
 
-    /**
-     * 条目点击事件
-     */
-    private OnItemClickListener mItemClickListener;
-
     public AutoWrapTabView(Context context) {
         this(context, null);
 
@@ -78,6 +75,12 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
     public AutoWrapTabView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.context = context;
+        if (attrs!=null){
+            TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.auto_wrap_tabview);
+            hGashSize = typedArray.getDimensionPixelSize(R.styleable.auto_wrap_tabview_horizontal_dash,0);
+            vGashSize = typedArray.getDimensionPixelSize(R.styleable.auto_wrap_tabview_vertical_dash,0);
+            typedArray.recycle();
+        }
         initView();
     }
 
@@ -109,10 +112,6 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
         buildView();
     }
 
-    public void setClickEnable(boolean clickEnable) {
-        this.clickEnable = clickEnable;
-    }
-
     /**
      * 构建视图
      */
@@ -126,8 +125,6 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
             View targetView = mAdapter.createView(context, i);
             //打上标签
             targetView.setTag(i);
-            if (clickEnable)
-            targetView.setOnClickListener(this);
             mItems.add(targetView);
             //数据绑定
             mAdapter.onBindView(targetView, i);
@@ -156,14 +153,6 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
         }
     }
 
-    /**
-     * 条目点击事件监听
-     *
-     * @param itemClickListener 条目点击事件监听器
-     */
-    public void setItemClickListener(OnItemClickListener itemClickListener) {
-        this.mItemClickListener = itemClickListener;
-    }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -222,13 +211,6 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
     }
 
     @Override
-    public void onClick(View v) {
-        if (mItemClickListener != null) {
-            mItemClickListener.onItemClicked((Integer) v.getTag());
-        }
-    }
-
-    @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return super.onInterceptTouchEvent(ev);
     }
@@ -253,10 +235,4 @@ public class AutoWrapTabView extends LinearLayout implements View.OnClickListene
         return linearLayout;
     }
 
-    /**
-     * 条目点击事件监听
-     */
-    public interface OnItemClickListener {
-        void onItemClicked(int position);
-    }
 }

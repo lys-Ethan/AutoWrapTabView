@@ -1,15 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
     tools:context=".MainActivity">
 
    <com.pmlee.autowraptabview.view.AutoWrapTabView
-       android:id="@+id/autoWrapView"
+       android:id="@+id/autoWrapView1"
+       app:vertical_dash="5dp"
+       app:horizontal_dash="5dp"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="wrap_content"
+       />
+   <com.pmlee.autowraptabview.view.AutoWrapTabView
+       android:id="@+id/autoWrapView2"
+       app:vertical_dash="5dp"
+       app:horizontal_dash="5dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       />
+   <com.pmlee.autowraptabview.view.AutoWrapTabView
+       android:id="@+id/autoWrapView3"
+       app:vertical_dash="5dp"
+       app:horizontal_dash="5dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="5dp"
+       />
+   <com.pmlee.autowraptabview.view.AutoWrapTabView
+       android:id="@+id/autoWrapView4"
+       app:vertical_dash="5dp"
+       app:horizontal_dash="5dp"
+       android:layout_marginTop="5dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
        />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
