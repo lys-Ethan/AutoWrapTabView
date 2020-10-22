@@ -1,13 +1,13 @@
-### 前言
----
+# 前言
+
 最近工作中有了新需求，就是新增用户的兴趣爱好标签，对于标签要求就是需要一行一行的摆放，空间不足的时候则跳至下一行进行摆放。看了网上这样类似的UI实现五花八门的，但是可定制化比较差，所以就自己动手简单的实现了一个可定制化UI的标签控件，方便以后复用。
 
 ### 话不多说先上一个效果图~
----
+
 ![随机生成的标签](https://upload-images.jianshu.io/upload_images/8901754-ba05ef7d0600c233.jpeg?imageMogr2/auto-orient/strip%7CimageView2/2/w/600 )
 
-### 如何使用
----
+# 如何使用
+
 1.首先需要下载源码->[源码地址](https://github.com/PM-LEE/AutoWrapTabView.git)，可以直接对项目进行依赖，或者将源码中的必要文件拷到项目中。(源码同时也是可供运行的Demo)![必要文件](https://upload-images.jianshu.io/upload_images/8901754-903bfad21d561e33.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 2.在布局文件中声明一个AutoWrapAdapter标签，<com.pmlee.autowraptabview.view.AutoWrapTabView
@@ -64,13 +64,13 @@
 mAutoWrapView1 = findViewById(R.id.autoWrapView1);
 mAutoWrapView1.setAdapter(new YourAdapter(data));
 ```
-### 实现原理
----
+# 实现原理
+
 考虑到需要定制化UI所以采用了适配器模式。
 关于容器部分笔者为了偷懒，没有乖乖的继承至ViewGroup去算坐标，而是继承至LinearLayout将其布局设置为纵向。然后每一行为一个横向的LinearLayout，根据标签数据的数量并通过递归的方式加入到父布局中。具体的结构图如下。![view结构.png](https://upload-images.jianshu.io/upload_images/8901754-b417583e4ad50465.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 简单的适配器
----
+# 简单的适配器
+
 ```
 public abstract class AutoWrapAdapter<T> {
     protected List<T> datas;
